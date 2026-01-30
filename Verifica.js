@@ -3,24 +3,17 @@ let inputVoto = document.getElementById("voti").value;
 let ArrayVoti = [];
 
 
-if (inputVoto !== "") {
-    let numero = parseFloat(inputVoto);
-    if (!isNaN(numero)) {
+
+    let numero = Number(inputVoto);
         ArrayVoti.push(numero);
-    }
-}
+
 
 let nuovoVoto;
 do {
     let risposta = prompt("Inserisci un altro voto (digita -1 per terminare):");
-    
-    nuovoVoto = parseFloat(risposta);
-
-    if (isNaN(nuovoVoto)) break;
-    if (nuovoVoto === -1) break;
-
+    nuovoVoto = Number(risposta);
     while ((nuovoVoto < 0 || nuovoVoto > 10) && nuovoVoto !== -1) {
-        nuovoVoto = parseFloat(prompt("Voto non valido! Inserisci un valore tra 0 e 10 (o -1 per uscire):"));
+        nuovoVoto = Number(prompt("Voto non valido! Inserisci un valore tra 0 e 10 (o -1 per uscire):"));
     }
 
     if (nuovoVoto !== -1 && !isNaN(nuovoVoto)) {
@@ -60,5 +53,25 @@ if (contatore >= 3) {
 
 document.getElementById("RischioBocciatura").innerHTML = messaggio;
 
+
+let listaUl = document.getElementById("Lista");
+listaUl.innerHTML = ""; 
+
+
+for (let i = 0; i < ArrayVoti.length; i++) {
+    let elemento = document.createElement("li");
+    let voto = ArrayVoti[i];
+    elemento.textContent = voto;
+
+   
+    if (voto % 2 === 0) {
+    elemento.style.color = "blue";
+    } else {
+    elemento.style.color = "red";
+    }
+
     
+    listaUl.appendChild(elemento);
+    }
 }
+    
